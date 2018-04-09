@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
 
@@ -6,17 +6,26 @@ import SearchBar from './components/search_bar';
 
 const API_KEY = 'AIzaSyDM_UzMxSV2qA2rB_TEGPMM6QXrjq-6PTg';
 
-YTSearch({key: API_KEY, term: 'puppies'}, function(data) {
-  console.log(data);
-});
-
 // create a function component used to produce HTML
-const App = () => {
-  return (
-    <div>
-      <SearchBar />
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { videos: [] };
+
+    YTSearch({key: API_KEY, term: 'puppies'}, (videos) => {
+      // with ES6 this will resolve to 'this.setState({ videos: videos });
+      this.setState({ videos });
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <SearchBar />
+      </div>
+    );
+  }
 }
 
 // use jsx tags around the component name to create instance
