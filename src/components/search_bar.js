@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 // required: return jsx
 class SearchBar extends Component {
   render() {
-    return <input onChange={(event) => console.log(event.target.value) } />
+    return <input onChange={event => console.log(event.target.value) } />
   }
 }
 
